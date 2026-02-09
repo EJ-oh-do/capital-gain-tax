@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>양도소득세 계산기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>부동산 양도소득세 계산기</h1>
+      <p class="subtitle">취득일·매도일·매도가액을 입력하면 5월 9일 기준 중과 전·후 예상 세액을 비교합니다. (참고용)</p>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <h2>입력 정보</h2>
+
+        <div class="form-row two-cols">
+          <div class="form-group">
+            <label for="acquisitionDate">취득일</label>
+            <input type="date" id="acquisitionDate">
+          </div>
+          <div class="form-group">
+            <label for="saleDate">매도일</label>
+            <input type="date" id="saleDate">
+          </div>
+        </div>
+        <p class="hint" id="holdingInfo">취득일·매도일을 입력하면 보유기간과 장기보유특별공제 비율이 자동 계산됩니다.</p>
+
+        <div class="form-group">
+          <label for="acquisitionCost">취득가액 <span class="unit">만원</span></label>
+          <input type="number" id="acquisitionCost" placeholder="예: 30000" min="0" step="1">
+        </div>
+
+        <div class="form-group">
+          <label for="expenses">필요경비 (중개수수료 등) <span class="unit">만원</span></label>
+          <input type="number" id="expenses" placeholder="예: 500" min="0" step="1" value="0">
+        </div>
+
+        <div class="form-group">
+          <label for="assetType">자산 유형</label>
+          <select id="assetType">
+            <option value="general">토지·건물 (일반)</option>
+            <option value="house">주택·분양권·조합원입주권</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="houseCount">주택 보유 수</label>
+          <select id="houseCount">
+            <option value="1">1주택</option>
+            <option value="2">2주택</option>
+            <option value="3">3주택 이상</option>
+          </select>
+          <span class="hint">2주택 이상은 5월 9일 이후 매도 시 다주택 중과가 적용됩니다.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="label-block">매도가액 (4가지 시나리오) <span class="unit">만원</span></label>
+          <div class="sale-price-grid">
+            <div class="form-group compact">
+              <label for="salePrice1">매도가액 1</label>
+              <input type="number" id="salePrice1" placeholder="예: 40000" min="0" step="1">
+            </div>
+            <div class="form-group compact">
+              <label for="salePrice2">매도가액 2</label>
+              <input type="number" id="salePrice2" placeholder="예: 50000" min="0" step="1">
+            </div>
+            <div class="form-group compact">
+              <label for="salePrice3">매도가액 3</label>
+              <input type="number" id="salePrice3" placeholder="예: 60000" min="0" step="1">
+            </div>
+            <div class="form-group compact">
+              <label for="salePrice4">매도가액 4</label>
+              <input type="number" id="salePrice4" placeholder="예: 70000" min="0" step="1">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="btnCalculate" class="btn-primary">세액 계산하기</button>
+          <button type="button" id="btnReset" class="btn-secondary">초기화</button>
+        </div>
+      </section>
+
+      <section class="result-section" id="resultSection" aria-live="polite">
+        <h2>계산 결과</h2>
+        <div id="resultContent">
+          <p class="placeholder">위 항목을 입력한 뒤 [세액 계산하기]를 눌러주세요.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>※ 5월 9일 이전 매도 = 중과 없음 / 5월 9일 이후 매도 + 2주택 이상 = 다주택 양도세 중과 적용. 참고용이며 실제 신고 시 세법을 확인하세요.</p>
+    </footer>
+  </div>
+
+  <script src="calculator.js"></script>
+</body>
+</html>
